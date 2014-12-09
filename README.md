@@ -10,3 +10,25 @@ The Fractals
 ================
 I wrote the code to create a basic recursive circle drawing/fractal, a tree fractal, 2 types of ferns and a Sierpinski triangle.
 The Sierpinski Triangle is not working as it should be, but the general idea of it is written down in code.
+
+### Circle Fractal
+![circle]
+[circle]: https://raw.githubusercontent.com/tschant/Haskell_Fractals/master/images/circle_fractal.PNG
+
+### Tree Fractal
+![tree]
+[tree]: https://raw.githubusercontent.com/tschant/Haskell_Fractals/master/images/tree_fractal.PNG
+
+### Fern Fractal #1
+![fern1]
+[fern1]: https://raw.githubusercontent.com/tschant/Haskell_Fractals/master/images/fern1_fractal.PNG
+
+### Fern Fractal #2
+![fern2]
+[fern2]: https://raw.githubusercontent.com/tschant/Haskell_Fractals/master/images/fern2_fractal.PNG
+
+### Sierpinski Triangle
+
+Not how a true Sierpinski Triangle should look like
+![tri]
+[tri]: https://raw.githubusercontent.com/tschant/Haskell_Fractals/master/images/sierpinski_triangle.PNG
