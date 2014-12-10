@@ -77,25 +77,27 @@ circleFractal (centerX,centerY,r) count = [((centerX,centerY,r), count)]
      ++ (circleFractal (centerX - r, centerY, r/2) (count - 1))
 
 --(x,Y), length, angle, depth/count, current iter
-treeFractal :: Coord -> Double -> Double -> Int -> Int -> [(Coord,Coord)]
-treeFractal (x,y) l a 0  iter   = do
-      let x1 = x
+treeFractal :: Coord -> Double -> Int -> Int -> [(Coord,Coord)]
+treeFractal (x,y) l 0 iter   = do
+      let a = (pi/8)
+          x1 = x
           y1 = y
-          x2 = x-l*cos (a + (a * fromIntegral(iter))) 
-          y2 = y-l*sin (a + (a * fromIntegral(iter)))
-          x3 = x-l*cos ( (a - (a * fromIntegral(iter)))) 
-          y3 = y+l*sin ( (a - (a * fromIntegral(iter)))) 
+          x2 = x+l*cos (a + (a * fromIntegral(iter))) 
+          y2 = y+l*sin (a + (a * fromIntegral(iter)))
+          x3 = x+l*cos ( (a - (a * fromIntegral(iter)))) 
+          y3 = y-l*sin ( (a - (a * fromIntegral(iter)))) 
       [((x1,y1),(x2,y2)), ((x1,y1),(x3,y3))]
-treeFractal (x,y) l a count iter = do
-      let x1 = x
+treeFractal (x,y) l count iter = do
+      let a = (pi/8)
+          x1 = x
           y1 = y
-          x2 = x-l*cos (a + (a * fromIntegral(iter))) 
-          y2 = y-l*sin (a + (a * fromIntegral(iter))) 
-          x3 = x-l*cos ( (a - (a * fromIntegral(iter)))) 
-          y3 = y+l*sin ( (a - (a * fromIntegral(iter)))) 
+          x2 = x+l*cos (a + (a * fromIntegral(iter))) 
+          y2 = y+l*sin (a + (a * fromIntegral(iter))) 
+          x3 = x+l*cos ( (a - (a * fromIntegral(iter)))) 
+          y3 = y-l*sin ( (a - (a * fromIntegral(iter)))) 
       [((x1,y1),(x2,y2)), ((x1,y1),(x3,y3))]
-        ++ treeFractal (x2,y2) (0.66*l) a (count - 1) (iter+1)
-        ++ treeFractal (x3,y3) (0.66*l) a (count - 1) (iter+1)
+        ++ treeFractal (x2,y2) (0.66*l) (count - 1) (iter+1)
+        ++ treeFractal (x3,y3) (0.66*l) (count - 1) (iter+1)
 
 --Psuedo matrix multiplication
 fernFractal1 :: Coord -> [Double] -> [Coord]
@@ -165,7 +167,7 @@ main = do
 
 loop context = do 
       let (w,h) = (width context, height context)
-          depth = 8-- only used for circle, tree and sierpinkski
+          depth = 10-- only used for circle, tree and sierpinkski
 
       send context $ do
           beginPath()
@@ -208,7 +210,7 @@ fractal_func context fract action depth = do
                             sequence_ (map ((flip drawCircle) "black" . fst) (circleFractal (0,0,25) zoom))
           --Tree Fractal (1 Line to 2, 2 to 4...)
                         "treeFractal" -> do
-                            sequence_ (map ((flip drawSmallLine) "blue") (treeFractal (0,0) 25 (pi/8) zoom 0))
+                            sequence_ (map ((flip drawSmallLine) "blue") (treeFractal (0,0) 25 zoom 0))
           --Fern Fractal relies on random generated numbers
                         "fernFractalA" -> do
                             sequence_ (map ((flip drawDot) "green") (fernFractal1 (0,0) randNums) )
