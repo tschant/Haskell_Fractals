@@ -4,7 +4,9 @@ Haskell Fractals
 This is a project done for KU - EECS 776: Functional Languages.
 
 I created a Haskell application that would generate different type of fractals based on a menu selection.
-I am using a library called blank-canvas to draw the fractals to the browser.
+After selecting a fractal, you can zoom in (+/=) and out (-) using a keyboard, and you can pan with the arrow keys. 
+
+I am using a library called blank-canvas to draw the fractals to the browser. I generate a list of points that a draw function (drawCircle, drawLine, etc.) gets mapped across to display the picture.
 
 The Fractals
 ================
